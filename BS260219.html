@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bosung Engineering USA</title>
+
+    <section id="home" class="active">
+    <div style="text-align: center; padding-top: 10vh;">
+        <div class="home-logo">
+            <img src="image/LOGO/BOSUNG LOGO.png" alt="Bosung Engineering Logo">
+
+    
+
+        </div>
+        
+        <h1>CORPORATION BOSUNG <ENGINEERING.CO"></ENGINEERING></h1>
+        <p>Innovative Solutions in Industrial Automation</p>
+    </div>
+</section>
+
+    <style>
+        :root {
+            --main-blue: #002c5f;
+            --light-blue: #004a99;
+            --bg-gray: #f8f9fa;
+        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg-gray); color: #333; }
+
+        /* Navigation */
+        nav { background: var(--main-blue); display: flex; justify-content: center; position: fixed; width: 100%; top: 0; z-index: 1000; height: 70px; }
+        .menu { list-style: none; display: flex; margin: 0; padding: 0; }
+        .menu-item { position: relative; padding: 25px 20px; color: white; cursor: pointer; font-weight: bold; font-size: 13px; }
+        .menu-item:hover { background: var(--light-blue); }
+        
+        /* Dropdown */
+        .dropdown { display: none; position: absolute; top: 70px; left: 0; background: white; min-width: 250px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        .menu-item:hover .dropdown { display: block; }
+        .dropdown a { padding: 12px 20px; color: #333; text-decoration: none; display: block; font-size: 12px; border-bottom: 1px solid #eee; transition: 0.2s; }
+        .dropdown a:hover { background: #f0f4f8; color: var(--light-blue); padding-left: 25px; }
+
+        /* Section Display Logic */
+        section { display: none; padding: 120px 10% 80px; min-height: 80vh; animation: fadeIn 0.4s ease-out; }
+        section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Titles & Common Layouts */
+        .section-title { font-size: 28px; color: var(--main-blue); margin-bottom: 30px; border-left: 5px solid var(--main-blue); padding-left: 15px; text-transform: uppercase; }
+        .flex-container { display: flex; align-items: center; gap: 50px; }
+        .text-content { flex: 1; }
+        .text-content ul { list-style: none; padding: 0; }
+        .text-content li { margin-bottom: 15px; position: relative; padding-left: 25px; font-size: 17px; line-height: 1.6; }
+        .text-content li::before { content: '•'; position: absolute; left: 0; color: var(--light-blue); font-weight: bold; font-size: 24px; top: -5px; }
+        .image-content img, .full-image-center img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .full-image-center { text-align: center; }
+
+        /* Tab Buttons */
+        .tab-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .tab-btn { padding: 10px 18px; border: 1px solid #ddd; background: #fff; cursor: pointer; border-radius: 4px; font-size: 13px; font-weight: 600; transition: 0.2s; }
+        .tab-btn:hover { border-color: var(--light-blue); color: var(--light-blue); }
+        .tab-btn.active { background: var(--main-blue); color: #fff; border-color: var(--main-blue); }
+
+        /* Process Gallery Grid */
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+        .process-card { background: white; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; text-align: center; transition: 0.3s; }
+        .process-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .process-card img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #eee; background: #f0f0f0; }
+        .process-card h4 { padding: 15px; margin: 0; font-size: 14px; color: var(--main-blue); line-height: 1.4; display: flex; align-items: center; justify-content: center; min-height: 50px; }
+
+        /* Automated Systems Detail */
+        .product-detail { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .product-images { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+        .product-images img { max-width: 45%; border-radius: 8px; border: 1px solid #eee; }
+        .product-images img.full { max-width: 80%; }
+        .product-info { text-align: center; }
+        .product-info h3 { color: var(--main-blue); font-size: 24px; margin-bottom: 15px; }
+        .product-info p { color: #666; font-size: 16px; line-height: 1.6; max-width: 800px; margin: 0 auto; }
+
+        /* Track Record Layout */
+        .track-container { display: flex; flex-direction: column; gap: 30px; }
+        .track-row { display: flex; gap: 30px; }
+        .track-card { flex: 1; background: #fff; padding: 30px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .client-logo-box { text-align: center; margin-bottom: 25px; height: 60px; display: flex; align-items: center; justify-content: center; }
+        .client-logo-box img { max-height: 100%; max-width: 180px; object-fit: contain; }
+        .track-content h3 { color: var(--main-blue); font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid var(--bg-gray); padding-bottom: 10px; }
+        .track-list { list-style: none; padding: 0; margin: 0; }
+        .track-list li { margin-bottom: 10px; padding-left: 20px; position: relative; font-size: 14px; line-height: 1.5; color: #555; }
+        .track-list li::before { content: '→'; position: absolute; left: 0; color: var(--light-blue); font-weight: bold; }
+        .multi-logo-box { display: flex; justify-content: space-around; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .multi-logo-box img { height: 35px; object-fit: contain; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul class="menu">
+        <li class="menu-item" onclick="showSection('home')">HOME</li>
+        <li class="menu-item">
+            01. COMPANY OVERVIEW
+            <div class="dropdown">
+                <a href="javascript:void(0);" onclick="showSection('about-company')">About the Company</a>
+                <a href="javascript:void(0);" onclick="showSection('mission-vision')">Mission and Vision</a>
+                <a href="javascript:void(0);" onclick="showSection('org-chart')">Organization Chart</a>
+            </div>
+        </li>
+        <li class="menu-item">
+            02. EQUIPMENT
+            <div class="dropdown">
+                <a href="javascript:void(0);" onclick="showSection('equipment')">Machining Equipment</a>
+            </div>
+        </li>
+        <li class="menu-item">
+            03. AUTOMATED SYSTEMS
+            <div class="dropdown">
+                <a href="javascript:void(0);" onclick="showSection('sys-articulation-special')">Articulation Arm (Special)</a>
+                <a href="javascript:void(0);" onclick="showSection('sys-articulation-standard')">Standard Articulation Arm</a>
+                <a href="javascript:void(0);" onclick="showSection('sys-articulation-press')">Press Articulation Arm</a>
+                <a href="javascript:void(0);" onclick="showSection('sys-auto-moving')">Auto Moving Arm (Special)</a>
+                <a href="javascript:void(0);" onclick="showSection('sys-tire-nutrunner')">Tire Nutrunner Arm</a>
+                <a href="javascript:void(0);" onclick="showSection('sys-factory-auto')">Automatic System & Factory Automation</a>
+            </div>
+        </li>
+        <li class="menu-item">
+            05. KEY PRODUCTS
+            <div class="dropdown">
+                <a href="javascript:void(0);" onclick="showSection('prod-motras-dom')">MOTRAS - Domestic (Korea)</a>
+                <a href="javascript:void(0);" onclick="showSection('prod-motras-ovs')">HYUNDAI MOBIS - Overseas (Global)</a>
+            </div>
+        </li>
+        <li class="menu-item" onclick="showSection('track-record')">06. TRACK RECORD</li>
+    </ul>
+</nav>
+
+<section id="home" class="active">
+    <div style="text-align: center; padding-top: 15vh;">
+        <h1 style="font-size: 50px; color: var(--main-blue);">BOSUNG ENGINEERING USA</h1>
+        <p style="font-size: 22px;">Innovative Solutions in Industrial Automation</p>
+    </div>
+</section>
+
+<section id="about-company">
+    <h2 class="section-title">About the Company</h2>
+    <div class="flex-container">
+        <div class="text-content">
+            <ul>
+                <li>Specialized in the design and production of high-precision automotive equipment and advanced testing systems.</li>
+                <li>Delivering 20 years of industry-leading experience.</li>
+                <li>A seamless, one-stop service model covering the entire lifecycle from initial design to final manufacturing.</li>
+            </ul>
+        </div>
+        <div class="image-content"><img src="image/about_the_company.png"></div>
+    </div>
+</section>
+
+<section id="mission-vision">
+    <h2 class="section-title">Mission and Vision</h2>
+    <div class="full-image-center"><img src="image/mission_vision.png"></div>
+</section>
+
+<section id="org-chart">
+    <h2 class="section-title">Organization Chart</h2>
+    <div class="full-image-center"><img src="image/organization_chart.png"></div>
+</section>
+
+<section id="equipment">
+    <h2 class="section-title">02. Equipment & Facilities</h2>
+    <div class="process-grid">
+        <div class="process-card"><img src="image/LATHE.jpg"><h4>Conventional Lathe</h4></div>
+        <div class="process-card"><img src="image/MILLING MACHINE (HWACHEON).png"><h4>Milling Machine</h4></div>
+        <div class="process-card"><img src="image/DRILLING MACHINE (SAMCHULLY).png"><h4>Drilling Machine</h4></div>
+        <div class="process-card"><img src="image/TAPPING MACHINE (SAMCHULLY).jpg"><h4>Tapping Machine</h4></div>
+        <div class="process-card"><img src="image/EDM.jpg"><h4>EDM</h4></div>
+        <div class="process-card"><img src="image/WELDING MACHINE.jpg"><h4>TIG Welding Machine</h4></div>
+        <div class="process-card"><img src="image/WELDING MACHINE.jpg"><h4>MIG Welding Machine</h4></div>
+        <div class="process-card"><img src="image/COUNTAR SAW.jpg"><h4>Contour Saw</h4></div>
+    </div>
+</section>
+
+<section id="sys-articulation-special">
+    <h2 class="section-title">Articulation Arm (Special)</h2>
+    <div class="product-detail">
+        <div class="product-images">
+            <img src="image/03 Articulation Arm (Special) 1-1.png">
+            <img src="image/03 Articulation Arm (Special) 1-2.png">
+        </div>
+        <div class="product-info"><h3>Customized High-Precision Solutions</h3><p>Our Special Articulation Arms are engineered to handle unique assembly challenges requiring complex multi-axis control.</p></div>
+    </div>
+</section>
+
+<section id="sys-articulation-standard">
+    <h2 class="section-title">Standard Articulation Arm</h2>
+    <div class="product-detail">
+        <div class="product-images"><img src="image/03 Standard Articulation Arm 1-1.png" class="full"></div>
+        <div class="product-info"><h3>Versatile Industrial Standard</h3><p>Reliable foundation for general assembly lines.</p></div>
+    </div>
+</section>
+
+<section id="sys-articulation-press">
+    <h2 class="section-title">Press Articulation Arm</h2>
+    <div class="product-detail">
+        <div class="product-images"><img src="image/03 Press Articulation Arm.png" class="full"></div>
+        <div class="product-info"><h3>Heavy-Duty Torque Absorption</h3><p>Reinforced for press-fitting and high-torque operations.</p></div>
+    </div>
+</section>
+
+<section id="sys-auto-moving">
+    <h2 class="section-title">Auto Moving Arm (Special)</h2>
+    <div class="product-detail">
+        <div class="product-images"><img src="image/03 Auto Moving Arm (Special).png" class="full"></div>
+        <div class="product-info"><h3>Dynamic Line Flexibility</h3><p>Motorized rail system to track production line movement.</p></div>
+    </div>
+</section>
+
+<section id="sys-tire-nutrunner">
+    <h2 class="section-title">Tire Nutrunner Arm</h2>
+    <div class="product-detail">
+        <div class="product-images"><img src="image/03 Tire Nutrunner Arm.png" class="full"></div>
+        <div class="product-info"><h3>Specialized for Tire Assembly</h3><p>Robust structure for heavy-duty multi-nutrunners.</p></div>
+    </div>
+</section>
+
+<section id="sys-factory-auto">
+    <h2 class="section-title">Automatic System & Factory Automation</h2>
+    <div class="product-detail">
+        <div class="product-images">
+            <img src="image/03 Automatic System & Factory Automation 1-1.png">
+            <img src="image/03 Automatic System & Factory Automation 1-2.png">
+        </div>
+        <div class="product-info"><h3>Smart Factory Integration</h3><p>Full factory automation with PLC-controlled systems.</p></div>
+    </div>
+</section>
+
+<section id="prod-motras-dom">
+    <h2 class="section-title">
+    MOTRAS - Domestic (Korea) 
+    <img src="image/LOGO/MOTRAS.webp" alt="MOTRAS Logo" style="height: 20px; object-fit: contain; margin-left: 20px;"> 
+</h2>
+    </div>
+
+    <div class="tab-group">
+        <button class="tab-btn" onclick="updateMotrasGallery('dom', 'pyeongtaek', this)">Pyeongtaek</button>
+        <button class="tab-btn" onclick="updateMotrasGallery('dom', 'hwaseong', this)">Hwaseong</button>
+        <button class="tab-btn" onclick="updateMotrasGallery('dom', 'ulsan', this)">Ulsan</button>
+    </div>
+    <div id="gallery-dom" class="process-grid"></div>
+</section>
+
+<section id="prod-motras-ovs">
+    <h2 class="section-title">HYUNDAI MOBIS - Overseas (Global)
+        <img src="image/LOGO/HYUNDAI MOBIS.png" alt="MOTRAS Logo" style="height: 35px; object-fit: contain; margin-left: 20px;"> 
+</h2>
+    </h2>
+    <div class="tab-group">
+        <button class="tab-btn" onclick="updateMotrasGallery('ovs', 'alabama', this)">Alabama (MUA)</button>
+        <button class="tab-btn" onclick="updateMotrasGallery('ovs', 'montgomery', this)">Montgomery</button>
+        <button class="tab-btn" onclick="updateMotrasGallery('ovs', 'detroit', this)">Detroit</button>
+        <button class="tab-btn" onclick="updateMotrasGallery('ovs', 'georgia', this)">Georgia (MAL-GA)</button>
+        <button class="tab-btn" onclick="updateMotrasGallery('ovs', 'savannah', this)">Savannah (MAL-SV)</button>
+        <button class="tab-btn" onclick="updateMotrasGallery('ovs', 'hungary', this)">Hungary (MHU)</button>
+        <button class="tab-btn" onclick="updateMotrasGallery('ovs', 'singapore', this)">Singapore (HMGICS)</button>
+    </div>
+    <div id="gallery-ovs" class="process-grid"></div>
+</section>
+
+<section id="track-record">
+    <h2 class="section-title">06. Track Record</h2>
+    <div class="track-container">
+        <div class="track-row">
+            <div class="track-card">
+                <div class="client-logo-box"><img src="image/LOGO/HYUNDAI.png" alt="HYUNDAI"></div>
+                <div class="track-content">
+                    <h3>HYUNDAI</h3>
+                    <ul class="track-list">
+                        <li>Supply and installation of nutrunner torque arms and reaction bars</li>
+                        <li>Over 200 installations completed</li>
+                        <li>Domestic: Ulsan, Jeonju, etc.</li>
+                        <li>Overseas: China, India, Vietnam, etc.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="track-card">
+                <div class="client-logo-box"><img src="image/LOGO/Hyundai_Wia_logo.png" alt="HYUNDAI WIA"></div>
+                <div class="track-content">
+                    <h3>HYUNDAI WIA</h3>
+                    <ul class="track-list">
+                        <li>Nutrunner torque arms for chassis modules and engine assembly</li>
+                        <li>Over 300 installations completed</li>
+                        <li>Domestic: Ansan, Seosan, Gwangju, etc.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="track-row">
+            <div class="track-card" style="flex: 1.5;">
+                <div class="client-logo-box"><img src="image/LOGO/MOTRAS.webp" alt="MOTRAS"></div>
+                <div class="track-content">
+                    <h3>MOTRAS</h3>
+                    <div style="display: flex; gap: 20px;">
+                        <ul class="track-list" style="flex: 1;">
+                            <li>Nutrunner torque arms for chassis modules and engine assembly</li>
+                            <li><strong>Over 1000 installations completed</strong></li>
+                            <li>Domestic: Asan, Seosan, Anyang, Gwangju, Ulsan, Iwha, Poseung, etc.</li>
+                        </ul>
+                        <ul class="track-list" style="flex: 1;">
+                            <li>Overseas: USA (Alabama, Montgomery, Detroit, Savannah)</li>
+                            <li>Global: Mexico, India, Turkey, Brazil, Uzbekistan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="track-card">
+                <div class="multi-logo-box">
+                    <img src="image/LOGO/SsangYong-Logo.png" alt="SSANGYONG">
+                    <img src="image/LOGO/GM KOREA.png" alt="GM KOREA">
+                    <img src="image/LOGO/DOOSAN.png" alt="DOOSAN">
+                </div>
+                <div class="track-content">
+                    <h3>PARTNERS & OTHERS (SSANGYONG, GM KOREA, DOOSAN)</h3>
+            
+                    <ul class="track-list">
+                        <li>Supply and installation for SsangYong Motor Company</li>
+                        <li>Supply and installation for GM Korea & Uzbekistan</li>
+                        <li>Supply and installation for Doosan Infracore</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// 데이터 정의
+const motrasData = {
+    dom: {
+        pyeongtaek: ["SHOCK ABSORBER + AXLE", "PE BRACKET + MBR", "G.BOX + MBR", "S.BAR + MBR", "DIFF + MBR", "ICCU BRACKET + MBR", "S.BAR + MBR", "TORSION BEAM + SUSPENSION", "LOW ARM + AXLE", "PE MODULE + MBR"],
+        hwaseong: ["ASSIST ARM + AXLE", "S.BAR + MBR", "CALIPER + AXLE", "S.BAR LINK + S.BAR", "PE MODULE + MBR", "CARBON ARM", "TORSION BEAM + AXLE", "LOW ARM + AXLE", "TIEROD + AXLE", "STRUT + LINK"],
+        ulsan: ["S.BAR LINK + S.BAR", "COMPRESSION ARM + MBR", "DIFF + MBR", "RWS & ASSIST ARM + MBR", "G.BOX + MBR", "UPPER ARM + AXLE", "SHOCK ABSORBER + AXLE", "STRUT + LINK", "TIEROD + AXLE", "STRUT + S.BAR LINK"]
+    },
+    ovs: {
+        alabama: ["ALABAMA (1)", "ALABAMA (2)", "ALABAMA (3)", "ALABAMA (4)"],
+        montgomery: ["Montgomery (1)", "Montgomery (2)"],
+        detroit: ["G.BOX + MBR", "LATERAL ARM + AXLE", "ROLL ROD BRKT + MBR", "PE + MBR", "COMPRESSION ARM + AXLE", "HUB BEARING + DRIVE SHAFT", "ENGINE + TM", "LINK + CARRIER", "STRUT + CARRIER", "TORSION BEAM + AXLE"],
+        georgia: ["MOUNTING BRACKET", "PE MODULE + MBR", "G.BOX + MBR", "UPPER ARM + AXLE", "S.BAR + MBR", "TIEROD + AXLE", "STRUT + LINK", "UPPER ARM + AXLE", "TRAILING ARM + AXLE", "JIG"],
+        savannah: ["ASSIST ARM + MBR", "STRUT + AXLE", "TIEROD + AXLE", "UPPER ARM + AXLE & MBR", "UPPER ARM + MBR", "S.BAR + MBR", "PE MODULE + MBR", "TRAILING ARM + AXLE", "S.BAR + MBR", "LATERAL ARM + AXLE"],
+        hungary: ["TORSION BAR + I.CARRIER", "DRIVE SHAFT + AXLE", "SPRING LINK + W.CARRIER", "CAMBER ARC", "ELASTOMER + I.CARRIER", "TIEROD + W.CARRIER", "LINKAGE + TORSION BAR", "PUSHING STRUT + I.CARRIER", "THRUST STRUT + CARRIER", "CONTROL ARM + I.CARRIER"],
+        singapore: ["S.BAR + MBR", "G.BOX + MBR", "G.BOX + MBR (LUBBERING)", "ASSIST ARM + AXLE", "T.ARM + AXLE", "LOW ARM + AXLE", "TIEROD + AXLE", "S.BAR + LINK", "STRUT + LINK", "LOW ARM + MBR"]
+    }
+};
+
+// 섹션 전환 함수
+function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => {
+        sec.style.display = 'none';
+        sec.classList.remove('active');
+    });
+    const target = document.getElementById(id);
+    if (target) {
+        target.style.display = 'block';
+        target.classList.add('active');
+        window.scrollTo(0, 0);
+    }
+}
+
+// 갤러리 업데이트 함수
+function updateMotrasGallery(type, city, btn) {
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const containerId = type === 'dom' ? 'gallery-dom' : 'gallery-ovs';
+    const container = document.getElementById(containerId);
+    container.innerHTML = ''; 
+
+    const capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1);
+
+    motrasData[type][city].forEach((name, index) => {
+        const card = document.createElement('div');
+        card.className = 'process-card';
+        const fileName = `Motras_${capitalizedCity} (${index + 1}) ${name}.jpg`;
+        const imgSrc = `image/${fileName}`;
+
+        card.innerHTML = `
+            <img src="${imgSrc}" onerror="this.src='https://via.placeholder.com/300x220?text=Check+File+Name'">
+            <h4>${name}</h4>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// 초기 로드 설정
+window.onload = () => {
+    const pBtn = document.querySelector('#prod-motras-dom .tab-btn');
+    if(pBtn) pBtn.click();
+    const aBtn = document.querySelector('#prod-motras-ovs .tab-btn');
+    if(aBtn) aBtn.click();
+};
+</script>
+
+</body>
+</html>
